@@ -14,7 +14,7 @@ Use Maven to build.
 <dependency>
   <groupId>com.ibm.common</groupId>
   <artifactId>activitystreams</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -280,18 +280,18 @@ Each of the modules is provided as separate Maven artifacts.:
   <dependency>
     <groupId>com.ibm.common</groupId>
     <artifactId>activitystreams-actions</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
   </dependency>
   
   <dependency>
     <groupId>com.ibm.common</groupId>
     <artifactId>activitystreams-geo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
   </dependency>
   
   <dependency>
     <groupId>com.ibm.common</groupId>
     <artifactId>activitystreams-legacy</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
   </dependency>
 ```

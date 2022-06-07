@@ -21,7 +21,6 @@
  */
 package com.ibm.common.activitystreams.internal;
 
-import static com.google.gson.internal.bind.TypeAdapters.NUMBER;
 import static com.ibm.common.activitystreams.internal.Adapters.DATE;
 import static com.ibm.common.activitystreams.internal.Adapters.DATETIME;
 import static com.ibm.common.activitystreams.internal.Adapters.NLV;
@@ -46,6 +45,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Date;
 
+import com.google.gson.ToNumberPolicy;
+import com.google.gson.TypeAdapter;
+import com.google.gson.internal.bind.NumberTypeAdapter;
+import com.google.gson.reflect.TypeToken;
 import org.joda.time.DateTime;
 import org.joda.time.ReadableDuration;
 import org.joda.time.ReadableInterval;
@@ -233,6 +236,10 @@ public final class GsonWrapper {
     Schema schema, 
     ASObjectAdapter base,
     Iterable<AdapterEntry<?>> adapters) {
+
+    TypeAdapter<Number> numberTypeAdapter =
+            NumberTypeAdapter.getFactory(ToNumberPolicy.LAZILY_PARSED_NUMBER)
+                    .create(null, TypeToken.get(Number.class));
     
     GsonBuilder gson = new GsonBuilder()
     .registerTypeHierarchyAdapter(TypeValue.class, new TypeValueAdapter(schema))
@@ -246,8 +253,8 @@ public final class GsonWrapper {
     .registerTypeHierarchyAdapter(Optional.class, OPTIONAL)
     .registerTypeHierarchyAdapter(Range.class, RANGE)
     .registerTypeHierarchyAdapter(Table.class, TABLE)
-    .registerTypeHierarchyAdapter(LazilyParsedNumber.class, NUMBER)
-    .registerTypeHierarchyAdapter(LazilyParsedNumberComparable.class, NUMBER)
+    .registerTypeHierarchyAdapter(LazilyParsedNumber.class, numberTypeAdapter)
+    .registerTypeHierarchyAdapter(LazilyParsedNumberComparable.class, numberTypeAdapter)
     .registerTypeHierarchyAdapter(ReadableDuration.class, DURATION)
     .registerTypeHierarchyAdapter(ReadablePeriod.class, PERIOD)
     .registerTypeHierarchyAdapter(ReadableInterval.class, INTERVAL)
